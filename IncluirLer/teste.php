@@ -86,4 +86,43 @@ function excluirArquivoJogadores() {
 // }
 
 ?>
+<?php
+
+function alterarAluno($matriculaAntiga, $novaMatricula, $novoNome, $novaIdade) {
+    $arquivo = "alunos.txt";
+    $linhas = file($arquivo); // Lê todas as linhas do arquivo e armazena em um array.
+
+    $novoConteudo = "";
+    $alterado = false;
+
+    foreach ($linhas as $linha) {
+        $dados = explode(";", $linha); // Divide a linha em partes usando ';' como separador.
+        $matricula = trim($dados[0]); // Pega a matrícula do aluno e remove espaços em branco.
+
+        if ($matricula === $matriculaAntiga) {
+            // Aluno encontrado, faz a alteração
+            $linha = $novaMatricula . ";" . $novoNome . ";" . $novaIdade . "\n"; // Cria a nova linha com os dados atualizados.
+            $alterado = true;
+        }
+
+        $novoConteudo .= $linha; // Adiciona a linha atual (alterada ou não) ao novo conteúdo.
+    }
+
+    if ($alterado) {
+        // Reescreve o arquivo com as alterações
+        file_put_contents($arquivo, $novoConteudo);
+        return true; // Sucesso na alteração
+    } else {
+        return false; // Aluno não encontrado
+    }
+}
+
+// Exemplo de uso:
+// if (alterarAluno("12345", "54321", "João Silva", 20)) {
+//     echo "Os dados do aluno foram alterados com sucesso.";
+// } else {
+//     echo "Aluno não encontrado.";
+// }
+
+?>
 
