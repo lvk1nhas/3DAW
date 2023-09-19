@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1>Alterar Disciplina</h1>
+<form action="ex07_alterarDisciplina.php" method="POST">
+    Sigla da Disciplina a Ser Alterada: <input type="text" name="siglaAntiga">
+    <br><br>
+    Novo Nome: <input type="text" name="novoNome">
+    <br><br>
+    Nova Sigla: <input type="text" name="novaSigla">
+    <br><br>
+    Nova Carga Horária: <input type="text" name="novaCarga">
+    <br><br>
+    <input type="submit" name="alterar" value="Alterar Disciplina">
+</form>
+</body>
+</html>
