@@ -1,0 +1,78 @@
+<?php
+function alterarDisciplina($nomeAntigo, $novaNome, $novaSigla, $novaCarga) {
+    $arquivo = "disciplinas.txt";
+
+    // Lê o conteúdo atual do arquivo para uma matriz
+    $linhas = file($arquivo);
+
+    // Abre o arquivo para escrita
+    $arqDisc = fopen($arquivo, "w") or die("Erro ao abrir o arquivo.");
+
+    // Percorre as linhas para encontrar a disciplina a ser alterada
+    foreach ($linhas as $linha) {
+        $dados = explode(";", $linha);
+        $nome = trim($dados[0]);
+
+        if ($nome === $nomeAntigo) {
+            // Substitui os dados antigos pelos novos
+            $linha = $novaNome . ";" . $novaSigla . ";" . $novaCarga . "\n";
+        }
+
+        // Escreve a linha de volta no arquivo
+        fwrite($arqDisc, $linha);
+    }
+
+    // Fecha o arquivo
+    fclose($arqDisc);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Obtenha os valores do formulário
+    $nome = $_POST["nome"];
+    $sigla = $_POST["sigla"];
+    $carga = $_POST["carga"];
+
+    // Verifique se é uma solicitação de alteração
+    if (isset($_POST['alterar'])) {
+        $nomeAntigo = $_POST["nomeAntigo"];
+        alterarDisciplina($nomeAntigo, $nome, $sigla, $carga);
+        $msg = "Disciplina alterada com sucesso!";
+    }
+}
+?>
+
+
+<?php
+function excluirDisciplina($nomeExcluir) {
+    $arquivo = "disciplinas.txt";
+
+    // Lê o conteúdo atual do arquivo para uma matriz
+    $linhas = file($arquivo);
+
+    // Abre o arquivo para escrita
+    $arqDisc = fopen($arquivo, "w") or die("Erro ao abrir o arquivo.");
+
+    // Percorre as linhas para encontrar a disciplina a ser excluída
+    foreach ($linhas as $linha) {
+        $dados = explode(";", $linha);
+        $nome = trim($dados[0]);
+
+        if ($nome !== $nomeExcluir) {
+            // Escreve a linha de volta no arquivo (exceto a que deve ser excluída)
+            fwrite($arqDisc, $linha);
+        }
+    }
+
+    // Fecha o arquivo
+    fclose($arqDisc);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Obtenha o nome da disciplina a ser excluída
+    if (isset($_POST['excluir'])) {
+        $nomeExcluir = $_POST["nomeExcluir"];
+        excluirDisciplina($nomeExcluir);
+        $msg = "Disciplina excluída com sucesso!";
+    }
+}
+?>
