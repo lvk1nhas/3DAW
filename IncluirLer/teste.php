@@ -61,3 +61,29 @@ function excluirJogador($nome) {
 //excluirJogador("Cristiano Ronaldo");
 
 ?>
+
+<?php
+
+function excluirArquivoJogadores() {
+    $arquivo = "jogadores_flamengo.txt";
+
+    if (file_exists($arquivo)) {
+        if (unlink($arquivo)) {
+            return true; // Sucesso na exclusão do arquivo
+        } else {
+            return false; // Falha na exclusão do arquivo
+        }
+    } else {
+        return false; // O arquivo não existe
+    }
+}
+
+// Exemplo de uso:
+// if (excluirArquivoJogadores()) {
+//     echo "O arquivo de jogadores foi excluído com sucesso.";
+// } else {
+//     echo "Falha ao excluir o arquivo de jogadores.";
+// }
+
+?>
+
