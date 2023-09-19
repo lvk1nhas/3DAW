@@ -92,8 +92,8 @@ function alterarAluno($matriculaAntiga, $novaMatricula, $novoNome, $novaIdade) {
     $arquivo = "alunos.txt";
     $linhas = file($arquivo); // Lê todas as linhas do arquivo e armazena em um array.
 
-    $novoConteudo = "";
-    $alterado = false;
+    $novoConteudo = ""; // Inicializa uma variável para armazenar o novo conteúdo do arquivo.
+    $alterado = false; // Inicializa uma variável para indicar se algum aluno foi alterado.
 
     foreach ($linhas as $linha) {
         $dados = explode(";", $linha); // Divide a linha em partes usando ';' como separador.
