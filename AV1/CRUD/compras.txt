@@ -1,0 +1,2 @@
+13|Taylor|13|2
+9|Laranja|7|5
