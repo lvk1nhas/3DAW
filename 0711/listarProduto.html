@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="description" content="CRUD">
+	<meta name="keywords" content="">
+	<meta name="author" content="lvk">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>FAETERJ - Alterar Produto</title>
+	
+    <link rel="stylesheet" href="estilo.css">
+    <script>
+        function ObterProduto() {
+            let id = document.getElementById("id").value;
+
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    let resposta = JSON.parse(this.responseText);
+                    if (resposta) {
+                        document.getElementById("resultado").innerHTML = "Nome: " + resposta.nome + "<br>UPC: " + resposta.upc + "<br>Valor: " + resposta.valor;
+                    } else {
+                        document.getElementById("resultado").innerHTML = "Produto não encontrado.";
+                    }
+                }
+            };
+            xmlhttp.open("POST", "listarProduto.php");
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("id=" + id);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <section id="menu">
+            <h1>Desenvolvimento de Aplicações Web - 3DAW</h1>
+            <h2>AV1 Manhã 2023</h2>
+            <h3>Aluno: Lucas de Oliveira de Melo<h3>
+            <br>
+            <a href="index.html">Página Inicial</a> |
+            <a href="insereProduto.html">Inserir Produto</a> |
+            <a href="alterarProduto.html">Alterar Produto</a> |
+            <a href="listarProduto.html">Detalhes de um Produto</a> |
+            <a href="excluiProduto.html">Excluir Produto</a> |
+            <a href="listarTodos.html">Listar Produtos</a>
+            <br>
+        </section>
+    
+    </header>
+    <section id="menu">
+        <form action="" method="POST">
+            ID do Produto: <input type="text" name="id" id="id" required><br>
+            <br><br>
+            <input type="button" value="Obter Produto" onclick="ObterProduto();">
+        </form>
+        <div id="resultado"></div>
+    </section>
+</body>
+</html>

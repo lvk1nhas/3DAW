@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="description" content="CRUD">
+	<meta name="keywords" content="">
+	<meta name="author" content="lvk">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>FAETERJ - Alterar Produto</title>
+	
+    <link rel="stylesheet" href="estilo.css">
+    <script>
+        function ListarProdutos() {
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    let produtos = JSON.parse(this.responseText);
+                    if (produtos.length > 0) {
+                        let produtosHTML = "<h1><br>Lista de Produtos</h1>";
+                        produtos.forEach(function(produto) {
+                            produtosHTML +=  "<p>ID: " + produto.id + "<br>Nome: " + produto.nome + "<br>UPC: " + produto.upc + "<br>Valor: " + produto.valor + "</p>";
+                           
+                        });
+                        document.getElementById("produtos").innerHTML = produtosHTML;
+                    } else {
+                        document.getElementById("produtos").innerHTML = "Nenhum produto encontrado.";
+                    }
+                }
+            };
+            xmlhttp.open("GET", "listarTodos.php");
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <section id="menu">
+            <h1>Desenvolvimento de Aplicações Web - 3DAW</h1>
+            <h2>AV1 Manhã 2023</h2>
+            <h3>Aluno: Lucas de Oliveira de Melo<h3>
+            <br>
+            <a href="index.html">Página Inicial</a> |
+            <a href="insereProduto.html">Inserir Produto</a> |
+            <a href="alterarProduto.html">Alterar Produto</a> |
+            <a href="listarProduto.html">Detalhes de um Produto</a> |
+            <a href="excluiProduto.html">Excluir Produto</a> |
+            <a href="listarTodos.html">Listar Produtos</a>
+            <br>
+        </section>
+    
+    </header>
+
+    <section id="menu">
+        <br>
+        <input type="button" value="Listar Produtos" onclick="ListarProdutos();">
+        <div id="produtos"></div>
+    </section>
+</body>
+</html>
