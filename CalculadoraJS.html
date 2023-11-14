@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    function sub() {
-      let a = document.getElementById("a").value;
-      let b = document.getElementById("b").value;
-      console.log("a: " + a);
-      console.log("b: " + b);
+  <script>
+    function operacao(operador) {
+      let a = document.getElementById("a").value;
+      let b = document.getElementById("b").value;
+      console.log("a: " + a);
+      console.log("b: " + b);
 
-      let resultado = Number(a) - Number(b);
-      console.log("Resultado: " + resultado);
+      let resultado;
 
-      document.getElementById("resultado").innerText = "Resultado: " + resultado;
-    }
-  </script>
+      switch (operador) {
+        case 'soma':
+          resultado = Number(a) + Number(b);
+          break;
+        case 'sub':
+          resultado = Number(a) - Number(b);
+          break;
+        case 'mult':
+          resultado = Number(a) * Number(b);
+          break;
+        case 'div':
+          resultado = Number(a) / Number(b);
+          break;
+        default:
+          console.error("Operador não reconhecido");
+          return;
+      }
+
+      console.log("Resultado: " + resultado);
+
+      document.getElementById("resultado").innerText = "Resultado: " + resultado;
+    }
+  </script>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sub</title>
+  <title>Calculadora</title>
 </head>
 <body>
 
-<div id="sub">
+<div id="calculadora">
   <input type="number" id="a">
   <input type="number" id="b">
-  <span id="resultado"></span>
-  <button id="btnsub" value="Sub" onclick="sub()">Subtracao</button>
-
- 
+  <span id="resultado"></span><br>
+  <button id="btnsoma" onclick="operacao('soma')">Soma</button>
+  <button id="btnsub" onclick="operacao('sub')">Subtração</button>
+  <button id="btnmult" onclick="operacao('mult')">Multiplicação</button>
+  <button id="btndiv" onclick="operacao('div')">Divisão</button>
 </div>
 
 </body>
