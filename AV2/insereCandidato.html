@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="description" content="CRUD">
+	<meta name="keywords" content="">
+	<meta name="author" content="lvk">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>FAETERJ - Inserir Produto</title>
+	
+    <link rel="stylesheet" href="estilo.css">
+    <script>
+        function EnviarProduto() {
+            let nome = document.getElementById("nome").value;
+            let cpf = document.getElementById("cpf").value;
+            let email = document.getElementById("email").value;
+            let id = document.getElementById("id").value;
+            let cargo = document.getElementById("cargo").value;
+            let sala = document.getElementById("sala").value;
+
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("Chegou a resposta OK: " + this.responseText);
+                    console.log("2");
+                    document.getElementById("msg").innerHTML = this.responseText;
+                } else
+                if (this.readyState < 4) {
+                    console.log("3: " + this.readyState);
+                } else
+                    console.log("Requisicao falhou: " + this.status);
+            }
+            xmlhttp.open("POST", "insereCandidato.php");
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("nome=" + nome + "&id=" + id + "&cpf=" + cpf + "&email=" + email + "&cargo=" + cargo + "&sala=" + sala);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <section id="menu">
+            <h1>Desenvolvimento de Aplicações Web - 3DAW</h1>
+            <h2>AV2 Manhã 2023</h2>
+            <h3>Aluno: Lucas de Oliveira de Melo<h3>
+            <br>
+            <a href="index.html">Página Inicial</a> |
+            <a href="insereFiscal.html">Inserir Fiscal</a> |
+            <a href="insereCandidato.html">Inserir Candidato</a> |
+            <a href="alterarCandidato.html">Alterar Candidato</a> |
+            <a href="listarTodos.html">Listar Candidatos</a>
+            <br>
+        </section>
+
+    </header>
+    
+    <section id="menu">
+        <h1>Cadastrar Candidato</h1>
+        <br>
+        <form action="" method="POST" name="formProduto" id="formProduto">
+            Nome do Candidato: <input type="text" name="nome" id="nome" required><br>
+            CPF: <input type="text" name="cpf" id="cpf"><br>
+            Identidade: <input type="text" name="id" id="id"><br>
+            email: <input type="text" name="email" id="email" required><br>
+            Cargo: <input type="text" name="cargo" id="cargo"><br>
+            Sala: <input type="text" name="sala" id="sala"><br>
+            <br><br>
+            <input type="button" value="Inserir" id="btnSend" onclick="EnviarProduto();">
+        </form>
+        <p id="msg"></p>
+    </section>
+</body>
+</html>

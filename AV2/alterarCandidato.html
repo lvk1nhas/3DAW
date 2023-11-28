@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="CRUD">
+    <meta name="keywords" content="">
+    <meta name="author" content="lvk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>FAETERJ - Alterar Candidato</title>
+    
+    <link rel="stylesheet" href="estilo.css">
+    <script>
+        function AlterarCandidato() {
+            let id = document.getElementById("id").value;
+            let novaSala = document.getElementById("novaSala").value;
+
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("Chegou a resposta OK: " + this.responseText);
+                    console.log("2");
+                    document.getElementById("msg").innerHTML = this.responseText;
+                } else if (this.readyState < 4) {
+                    console.log("3: " + this.readyState);
+                } else {
+                    console.log("Requisicao falhou: " + this.status);
+                }
+            }
+            xmlhttp.open("POST", "alterarCandidato.php");
+            xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlhttp.send("id=" + id + "&novaSala=" + novaSala);
+        }
+    </script>
+</head>
+<body>
+    
+    <header>
+        <section id="menu">
+            <h1>Desenvolvimento de Aplicações Web - 3DAW</h1>
+            <h2>AV2 Manhã 2023</h2>
+            <h3>Aluno: Lucas de Oliveira de Melo<h3>
+            <br>
+            <a href="index.html">Página Inicial</a> |
+            <a href="insereFiscal.html">Inserir Fiscal</a> |
+            <a href="insereCandidato.html">Inserir Candidato</a> |
+            <a href="alterarCandidato.html">Alterar Candidato</a> |
+            <a href="listarTodos.html">Listar Candidatos</a>
+            <br>
+        </section>
+    
+    </header>
+
+    <section id="menu">
+        <br>
+
+        <form action="" method="POST">
+            ID do Candidato a ser alterado: <input type="text" name="id" id="id" required><br>
+            Nova Sala: <input type="text" name="novaSala" id="novaSala"><br>
+            <br><br>
+            <input type="button" value="Alterar" onclick="AlterarCandidato();">
+        </form>
+        <p id="msg"></p>
+    </section>
+</body>
+</html>

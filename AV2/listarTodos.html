@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="CRUD">
+    <meta name="keywords" content="">
+    <meta name="author" content="lvk">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>FAETERJ - Listar Candidatos</title>
+    
+    <link rel="stylesheet" href="estilo.css">
+    <script>
+        function ListarCandidatos() {
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    let candidatos = JSON.parse(this.responseText);
+                    if (candidatos.length > 0) {
+                        let candidatosHTML = "<h1><br>Lista de Candidatos</h1>";
+                        candidatos.forEach(function(candidato) {
+                            candidatosHTML += "<br>Nome: " + candidato.nome + "<br>CPF: " + candidato.cpf + "<br>Identidade: " + candidato.id + "<br>Email: " + candidato.email + "<br>Cargo Pretendido: " + candidato.cargo + "<br>Sala de Prova: " + candidato.sala + "</p>";
+                        });
+                        document.getElementById("candidatos").innerHTML = candidatosHTML;
+                    } else {
+                        document.getElementById("candidatos").innerHTML = "Nenhum candidato encontrado.";
+                    }
+                }
+            };
+            xmlhttp.open("GET", "listarTodos.php");
+            xmlhttp.send();
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <section id="menu">
+            <h1>Desenvolvimento de Aplicações Web - 3DAW</h1>
+            <h2>AV2 Manhã 2023</h2>
+            <h3>Aluno: Lucas de Oliveira de Melo<h3>
+            <br>
+            <a href="index.html">Página Inicial</a> |
+            <a href="insereFiscal.html">Inserir Fiscal</a> |
+            <a href="insereCandidato.html">Inserir Candidato</a> |
+            <a href="alterarCandidato.html">Alterar Candidato</a> |
+            <a href="listarTodos.html">Listar Candidatos</a>
+            <br>
+        </section>
+    </header>
+
+    <section id="menu">
+        <br>
+        <input type="button" value="Listar Candidatos" onclick="ListarCandidatos();">
+        <div id="candidatos"></div>
+    </section>
+</body>
+</html>
